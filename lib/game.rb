@@ -4,13 +4,58 @@ require 'terminal_player.rb'
 
 # Implements the game Tic Tac Toe
 class Game
-  INSTRUCT_1 = "\nInstruction:\n------------ \n\nTo play, first determine who is Player1 and who is Player2.  \n\nWhen called, the specified player chooses his/her/its next field by typing in the 2-digit cells' code.\n\nThe cells' code consists of two numbers from 1 to 3. The first number specifies the chosen row, the second number the chosen column\n".freeze
-  INSTRUCT_2 = "For example '11' represents the upper left cell.\nDo not add any whitespaces between the two digits!\n------------\n\nReady to start?\n\nTo start, press ENTER \nto quit, type 'exit' then press ENTER\n------------\n\n".freeze
-  STARTPHRASE = "Nice, Let's start! First, define your players!\n".freeze
-  INSERT_PLAYER1 = "\nPlayer 1 is:  (Human, Bot)\n\n".freeze
-  INSERT_PLAYER2 = "\nPlayer 2 is:  (Human, Bot)\n\n".freeze
-  BYE = "\nThank you for playing.\nHave a nice day!\n------------\n\n".freeze
-  TIE = "\n\nIt's a tie!\n".freeze
+  INSTRUCT_1 = %(
+    Instruction:
+    ------------
+
+    To play, first determine who is Player1 and who is Player2.
+
+    When called, the specified player chooses his/her/its
+    next field by typing in the 2-digit cells' code.
+
+    The cells' code consists of two numbers from 1 to 3.
+    The first number specifies the chosen row,
+    the second number the chosen column
+  ).freeze
+
+  INSTRUCT_2 = %(
+    For example '23' represents the cell in
+    the middle of the right column.
+    Do not add any whitespaces between the two digits!
+    ------------
+
+    Ready to start?
+
+    To start, press ENTER
+    to quit, type 'exit' then press ENTER
+    ------------).freeze
+
+  STARTPHRASE = %(
+    Nice, Let's start! First, define your players!
+  ).freeze
+
+  INSERT_PLAYER1 = %(
+    Player 1 is:  (Human, Bot)
+  ).freeze
+
+  INSERT_PLAYER2 = %(
+    Player 2 is:  (Human, Bot)
+  ).freeze
+
+  BYE = %(
+    Thank you for playing.
+    Have a nice day!
+    ------------).freeze
+
+  TIE = %(
+    It's a tie!
+  ).freeze
+
+  NEXT_ROUND = %(
+    Press ENTER if you want to play another round!
+    Else just type 'exit' + ENTER
+
+    ------------).freeze
 
   def initialize
     @board = Board.new
@@ -18,25 +63,6 @@ class Game
     @wins_player1 = 0
     @wins_player2 = 0
     @ties = 0
-  end
-
-  def build_player(input)
-    case input
-    when 'human' then TerminalPlayer.new
-    when 'bot' then BotPlayer.new
-    else TerminalPlayer.new
-    end
-  end
-
-  def set_players(player1, player2)
-    @players = [[player1, :p1], [player2, :p2]]
-  end
-
-  def setup_player(input)
-    player = build_player(input)
-    player.set_player_name
-    player.set_symbol
-    player
   end
 
   def mainmenu
@@ -53,7 +79,7 @@ class Game
         run(players[0], players[1])
         evaluate_game
         show_stats
-        puts "\nPress ENTER if you want to play another round!\nElse just type 'exit' + ENTER\n\n\n------------\n\n"
+        puts NEXT_ROUND
         if gets.chomp.downcase != ''
           exit = true
           puts BYE
@@ -61,30 +87,6 @@ class Game
           @board.reset
         end
       end
-    end
-  end
-
-  def show_stats
-    puts "\n-------------------------------------------------------\n\n"
-    puts "\n________Your STATS_______\n\n"
-    puts "#{@players[0][0].name}:   WINS: #{@wins_player1}\n"
-    puts "#{@players[1][0].name}:   WINS: #{@wins_player2}\n"
-    puts "Number of TIES: #{@ties}\n\n"
-    puts "\n-------------------------------------------------------\n\n"
-  end
-
-  def evaluate_game
-    if @winner.nil?
-      @ties += 1
-      puts TIE
-    elsif @winner == @players[0][1]
-      @wins_player1 += 1
-      @players[0][0].set_win
-      puts "\n\nCongratulations #{@players[0][0].name}, you win!\n"
-    elsif @winner == @players[1][1]
-      @wins_player2 += 1
-      @players[1][0].set_win
-      puts "\n\nCongratulations #{@players[1][0].name}, you win!\n"
     end
   end
 
@@ -116,6 +118,50 @@ class Game
         end
         round += 1
       end
+    end
+  end
+
+  def show_stats
+    puts %(
+    -------------------------------------------------------
+
+                ________Your STATS_______
+
+      #{@players[0][0].name}:   WINS: #{@wins_player1}
+      #{@players[1][0].name}:   WINS: #{@wins_player2}
+      Number of TIES: #{@ties}
+
+
+    -------------------------------------------------------)
+  end
+
+  private
+
+  def build_player(input)
+    input == 'bot' ? BotPlayer.new : TerminalPlayer.new
+  end
+
+  def set_players(player1, player2)
+    @players = [[player1, :p1], [player2, :p2]]
+  end
+
+  def setup_player(input)
+    player = build_player(input)
+    player.set_player_name
+    player.set_symbol
+    player
+  end
+
+  def evaluate_game
+    if @winner.nil?
+      @ties += 1
+      puts TIE
+    elsif @winner == @players[0][1]
+      @wins_player1 += 1
+      puts "\n\nCongratulations #{@players[0][0].name}, you win!\n"
+    elsif @winner == @players[1][1]
+      @wins_player2 += 1
+      puts "\n\nCongratulations #{@players[1][0].name}, you win!\n"
     end
   end
 end

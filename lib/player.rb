@@ -7,8 +7,4 @@ class Player
     @symbol = 'x'
     @wins = 0
   end
-
-  def set_win
-    @wins += 1
-  end
 end

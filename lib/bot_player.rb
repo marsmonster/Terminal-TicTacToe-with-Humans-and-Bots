@@ -17,6 +17,27 @@ class BotPlayer < Player
     @name = (@@nr_of_bots == 1 ? 'Pink fluffy Robot @nna' : 'Blue sparkly Robot €mil')
   end
 
+  def get_move(board, player_id)
+    puts "\n    #{@name}'s move:'\n"
+    cell = two_in_row(board, player_id, 2)
+    return cell unless cell.nil?
+
+    cell = two_in_row(board, player_id, 0)
+    return cell unless cell.nil?
+
+    return [1, 1] if board.board[1][1] == :empty
+
+    possibilities = []
+    [0, 1, 2].each do |i|
+      [0, 1, 2].each do |j|
+        possibilities.push([i, j]) if board.board[i][j] == :empty
+      end
+    end
+    possibilities.sample(1)[0]
+  end
+
+  private
+
   def check_move(board, row, player_id, nr_of_occ)
     indxs = board.find_index_for_ids(row, [player_id, :empty])
     return indxs[1][0] if indxs[0].length == nr_of_occ && indxs[1].length == 1
@@ -45,24 +66,5 @@ class BotPlayer < Player
       return [col_ind, i] unless col_ind.nil?
     end
     nil
-  end
-
-  def get_move(board, player_id)
-    puts "\n#{@name}'s move:'\n"
-    cell = two_in_row(board, player_id, 2)
-    return cell unless cell.nil?
-
-    cell = two_in_row(board, player_id, 0)
-    return cell unless cell.nil?
-
-    return [1, 1] if board.board[1][1] == :empty
-
-    possibilities = []
-    [0, 1, 2].each do |i|
-      [0, 1, 2].each do |j|
-        possibilities.push([i, j]) if board.board[i][j] == :empty
-      end
-    end
-    possibilities.sample(1)[0]
   end
 end
