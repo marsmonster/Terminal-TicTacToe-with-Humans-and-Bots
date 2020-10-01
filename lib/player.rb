@@ -1,10 +1,9 @@
 # Implements the superclass player for Tic Tac Toe
 class Player
-  attr_reader :name, :symbol, :wins
+  attr_reader :name, :symbol
 
   def initialize
     @name = 'NoName'
     @symbol = 'x'
-    @wins = 0
   end
 end

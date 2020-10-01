@@ -158,10 +158,10 @@ class Game
       puts TIE
     elsif @winner == @players[0][1]
       @wins_player1 += 1
-      puts "\n\nCongratulations #{@players[0][0].name}, you win!\n"
+      puts "\n\n    Congratulations #{@players[0][0].name}, you win!\n"
     elsif @winner == @players[1][1]
       @wins_player2 += 1
-      puts "\n\nCongratulations #{@players[1][0].name}, you win!\n"
+      puts "\n\n    Congratulations #{@players[1][0].name}, you win!\n"
     end
   end
 end
