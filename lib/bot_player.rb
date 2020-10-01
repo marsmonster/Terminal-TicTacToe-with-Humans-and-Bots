@@ -49,18 +49,14 @@ class BotPlayer < Player
 
   def get_move(board, player_id)
     puts "\n#{@name}'s move:'\n"
-    # 1. two in row of self and last place empty: make row full
     cell = two_in_row(board, player_id, 2)
     return cell unless cell.nil?
 
-    # 2. two in row of enemy and last place empty: make row full
     cell = two_in_row(board, player_id, 0)
     return cell unless cell.nil?
 
-    # 3. [2,2] empty --> take that
     return [1, 1] if board.board[1][1] == :empty
 
-    # 4. take random empty spot
     possibilities = []
     [0, 1, 2].each do |i|
       [0, 1, 2].each do |j|
