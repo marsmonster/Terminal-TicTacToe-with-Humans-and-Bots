@@ -27,7 +27,7 @@ ruby main.rb
 
 The game starts with a mainmenu that will guide you through the game. It will first show you a short introduction, then give you the opportunity to choose your players, as well as their names and symbols.
 
-Everytime a match is completed you can choose if you want to continiue with another round or quit the game.
+Everytime a match is completed you can choose if you want to continue with another round or quit the game.
 
 ## Contributing
 Pull requests are very welcome. For major changes, please open an issue first to discuss what you would like to change.
