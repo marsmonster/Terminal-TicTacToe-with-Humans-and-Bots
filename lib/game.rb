@@ -13,7 +13,7 @@ class Game
     You can choose between HUMAN and BOT.
 
     As soon as the game starts, the specified player
-    chooses his/her/its cell of the borad by typing in
+    chooses his/her/its cell of the board by typing in
     the 2-digit cells' code.
 
     The cells' code consists of two numbers ranging from 1 to 3.
