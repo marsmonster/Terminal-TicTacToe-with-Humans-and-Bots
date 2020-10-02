@@ -8,7 +8,7 @@ If you don't quite feel the spark of intellectual challenge today, you can also 
 
 ## Installation
 
-To run the program you should have a Ruby interpreter installed. This prject was created using Ruby version 2.7.0
+To run the program you should have a Ruby interpreter installed. This project was created using Ruby version 2.7.0
 
 There is no need to install anything else. Just clone this repository to your local machine and you are good to go.
 
