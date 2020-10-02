@@ -10,14 +10,15 @@ class BotPlayer < Player
   end
 
   def set_symbol
-    @symbol = (@@nr_of_bots == 1 ? '@' : '€')
+    @symbol = (@@nr_of_bots == 1 ? '€' : '@')
   end
 
   def set_player_name
-    @name = (@@nr_of_bots == 1 ? 'Pink fluffy Robot @nna' : 'Blue sparkly Robot €mil')
+    @name = (@@nr_of_bots == 1 ? 'Pink fluffy Robot €mil' : 'Blue sparkly Robot @nnika')
   end
 
   def get_move(board, player_id)
+    sleep 1
     puts "\n    #{@name}'s move:'\n"
     cell = two_in_row(board, player_id, 2)
     return cell unless cell.nil?

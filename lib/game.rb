@@ -8,19 +8,21 @@ class Game
     Instruction:
     ------------
 
-    To play, first determine who is Player1 and who is Player2.
+    Before you start a match make sure to determine names,
+    symbols and species of the two players.
+    You can choose between HUMAN and BOT.
 
-    When called, the specified player chooses his/her/its
-    next field by typing in the 2-digit cells' code.
+    As soon as the game starts, the specified player
+    chooses his/her/its cell of the borad by typing in
+    the 2-digit cells' code.
 
-    The cells' code consists of two numbers from 1 to 3.
+    The cells' code consists of two numbers ranging from 1 to 3.
     The first number specifies the chosen row,
     the second number the chosen column
   ).freeze
 
   INSTRUCT_2 = %(
-    For example '23' represents the cell in
-    the middle of the right column.
+    For example 23 represents the middle cell of the right column.
     Do not add any whitespaces between the two digits!
     ------------
 
