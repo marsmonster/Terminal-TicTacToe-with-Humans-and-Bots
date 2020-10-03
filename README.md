@@ -31,7 +31,7 @@ Everytime a match is completed you can choose if you want to continue with anoth
 
 ## Contributing
 Pull requests are very welcome. 
-In case you feel particularly creative, you can also add you own fun Botnames to `bot_names.txt`. Just make sure you enter the bots in the same format as the other bots.
+In case you feel particularly creative, you can also add you own fun Botnames to `bot_names.txt`. Just make sure to enter the bots in the same format as the other bots.
 For major changes, please open an issue first to discuss what you would like to change.
 
 
