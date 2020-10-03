@@ -35,5 +35,4 @@ class TerminalPlayer < Player
     end
     false
   end
-
 end

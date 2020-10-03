@@ -37,11 +37,16 @@ class Game
   ).freeze
 
   INSERT_PLAYER1 = %(
-    Player 1 is:  (Human, Bot)
+    Player 1 is: ___ \(Type 'h' for Human or 'b' for Bot, then press ENTER\)
   ).freeze
 
   INSERT_PLAYER2 = %(
-    Player 2 is:  (Human, Bot)
+    Player 2 is: ___ \(Type 'h' for Human or 'b' for Bot, then press ENTER\)
+  ).freeze
+
+  TRY_AGAIN = %(
+    Please make sure you press the letter 'h' for Human and 'b' for Bot!
+    Just try again:
   ).freeze
 
   BYE = %(
@@ -87,6 +92,8 @@ class Game
           puts BYE
         else
           @board.reset
+          @players = [[@players[1][0], :p1], [@players[0][0], :p2]]
+          players[1], players[0] = players[0], players[1]
         end
       end
     end
@@ -140,7 +147,21 @@ class Game
   private
 
   def build_player(input)
-    input == 'bot' ? BotPlayer.new : TerminalPlayer.new
+    valid = false
+    until valid
+      valid = validate_species(input)
+      unless valid
+        puts TRY_AGAIN
+        input = gets.chomp.downcase
+      end
+    end
+    input == 'b' ? BotPlayer.new : TerminalPlayer.new
+  end
+
+  def validate_species(input)
+    return true if input == 'b' || input == 'h'
+
+    false
   end
 
   def set_players(player1, player2)

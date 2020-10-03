@@ -10,16 +10,27 @@ class BotPlayer < Player
   end
 
   def set_symbol
-    @symbol = (@@nr_of_bots == 1 ? '€' : '@')
+    @symbol
   end
 
   def set_player_name
-    @name = (@@nr_of_bots == 1 ? 'Pink fluffy Robot €mil' : 'Blue sparkly Robot @nnika')
+    read_bots_file
+    @name
+  end
+
+  def read_bots_file
+    bot_names_symbols = IO.readlines('bot_names.txt', chomp: true)
+    selection = bot_names_symbols.select.with_index do |_, indx|
+      indx % 2 == (@@nr_of_bots - 1)
+    end
+    name_and_symbol = selection.sample(1)[0].split(',')
+    @name = name_and_symbol[1]
+    @symbol = name_and_symbol[0]
   end
 
   def get_move(board, player_id)
     sleep 1
-    puts "\n    #{@name}'s move:'\n"
+    puts "\n    #{@name}'s move:\n"
     cell = two_in_row(board, player_id, 2)
     return cell unless cell.nil?
 
